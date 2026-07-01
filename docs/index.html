@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Scanner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <header class="page-header">
+    <h1>🛡 Phishing Scanner</h1>
+    <p class="subtitle">Эвристическая проверка писем на признаки фишинга — целиком в браузере, без внешних сервисов и без хранения данных.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel">
+      <h2>Письмо для проверки</h2>
+      <textarea id="email-text" placeholder="Вставьте текст письма (в идеале — с заголовками From/To/Subject)..."></textarea>
+
+      <div class="file-row">
+        <label class="file-label" for="email-file">
+          📎 Прикрепить .eml / .txt
+        </label>
+        <input type="file" id="email-file" accept=".eml,.txt" hidden>
+        <span id="file-name" class="file-name"></span>
+      </div>
+
+      <button id="analyze-btn" class="analyze-btn">Проверить письмо</button>
+      <p id="error-msg" class="error-msg" hidden></p>
+    </section>
+
+    <section class="panel result-panel">
+      <h2>Результат</h2>
+
+      <div id="empty-state" class="empty-state">
+        <p>Результат появится здесь после проверки.</p>
+      </div>
+
+      <div id="result-content" class="result-content" hidden>
+        <div class="gauge-row">
+          <svg id="gauge" viewBox="0 0 200 200" class="gauge">
+            <circle class="gauge-track" cx="100" cy="100" r="85"></circle>
+            <circle id="gauge-fill" class="gauge-fill" cx="100" cy="100" r="85"></circle>
+            <text id="gauge-score" x="100" y="94" class="gauge-score" text-anchor="middle">0</text>
+            <text id="gauge-verdict" x="100" y="122" class="gauge-verdict" text-anchor="middle">—</text>
+          </svg>
+        </div>
+
+        <div class="severity-bars" id="severity-bars">
+          <div class="bar-row">
+            <span class="bar-label">Высокий</span>
+            <div class="bar-track"><div class="bar-fill high" id="bar-high"></div></div>
+            <span class="bar-count" id="count-high">0</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Средний</span>
+            <div class="bar-track"><div class="bar-fill medium" id="bar-medium"></div></div>
+            <span class="bar-count" id="count-medium">0</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Низкий</span>
+            <div class="bar-track"><div class="bar-fill low" id="bar-low"></div></div>
+            <span class="bar-count" id="count-low">0</span>
+          </div>
+        </div>
+
+        <div class="findings-block">
+          <h3>Находки</h3>
+          <ul id="findings-list" class="findings-list"></ul>
+        </div>
+
+        <div class="links-block">
+          <h3>Ссылки <span id="links-total" class="links-total"></span></h3>
+          <ul id="links-list" class="links-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Демо-версия (GitHub Pages) — анализ выполняется прямо в браузере. Полная версия с Telegram-ботом: <a href="https://github.com/Alisher765645/phishing-scanner">исходный код на GitHub</a>.</p>
+  </footer>
+</div>
+
+<script src="analyzer.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

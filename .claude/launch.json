@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["app.py"],
       "port": 5000
+    },
+    {
+      "name": "docs-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "docs"],
+      "port": 8080
     }
   ]
 }
